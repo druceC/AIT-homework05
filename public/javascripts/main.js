@@ -34,32 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("deckGenerated:");
         console.log(deck);
         
-        // // Put user input on top of deck 
-        // if(userInputNULL){
-        //     console.log("true");
-        //     // Parse user input and put in array
-        //     topCards = userInput.split(',').map(card => ({rank: card.trim(),suit: 'D'}));
-        //     const temp = [...deck];
-        //     for(let i = 0; i < temp.length; i++){
-        //         for(let j = 0; j < topCards.length; j++){
-        //             if(temp[i] == topCards[j]){
-        //                 // temp[i].splice(i,1);
-        //             }
-        //         }
-        //     }
-        //     deck = topCards.concat(temp);
-        // }
         console.log("true");
-        // Parse user input and put in array
-        // topCards = userInput.split(',').map(card => ({rank: card.trim(),suit: 'D'}));
-        // const temp = [...deck];
-        // for(let i = 0; i < temp.length; i++){
-        //     for(let j = 0; j < topCards.length; j++){
-        //         if(temp[i] == topCards[j]){
-        //             temp[i].splice(i,1);
-        //         }
-        //     }
-        // }
 
         if (userInput) {
             console.log("true");
@@ -67,44 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const temp = deck.filter(card => !topCards.some(topCard => topCard.rank === card.rank && topCard.suit === card.suit));
             deck = topCards.concat(temp);
         }
-        // deck = topCards.concat(temp);
-        // // Print deck
+        // Print deck
         console.log("deck");
         console.log(deck);
         startGame(deck);
     });
 });
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     // Add an event listener to the form when the DOM is fully loaded
-//     const form = document.querySelector('.start form');
-  
-//     form.addEventListener('submit', (event) => {
-//         // Prevent the default form submission behavior
-//         console.log('button clicked');
-//         event.preventDefault();
-
-//         // Hide the form by adding the 'hidden' class
-//         const startDiv = document.querySelector('.start');
-//         startDiv.classList.add('hidden');
-//     });
-
-//     // Handle user input 
-//     const startValuesInput = document.getElementById('startValues');
-//     const userInput = startValuesInput.value;
-    
-//     if(userInput){
-//         console.log(userInput);
-//         // const topCards = userInput; 
-//         // const topCards = userInput.split(',').map(card => ({suit: 'Diamonds',rank: card.trim()}));
-//     }
-//     // deck = [...uniqueTopCards]
-// });
-
-
-
-
 
 // ----------------------------------------------------------------------------------------------------
   
@@ -147,161 +90,6 @@ const generateDeck = () => {
     return shuffleDeck(deck);
 };
 
-// const startGame = (deck) => {
-//     console.log("Game is starting!");
-
-//     // PRINT DECKS
-//     console.log("topCards:");
-//     console.log(topCards);
-//     console.log("deck");
-//     console.log(deck);
-
-//     let cardImg;
-//     let playerTurn = 1;
-  
-//     // DEAL CARDS - INITIAL
-//     ({ computerHand, playerHand } = dealCards(deck, 2));
-//     computerHand.forEach(element => {
-//         cardImg = document.createElement("img");
-//         cardImg.src = "/cards/"+buildCardString(element)+".png";
-//         computerHandS.push(buildCardString(element));
-//         computerScore = calculateHandTotal(computerHand);
-//         document.getElementById("computer-cards").append(cardImg);
-//     });
-//     playerHand.forEach(element => {
-//         cardImg = document.createElement("img");
-//         cardImg.src = "/cards/"+buildCardString(element)+".png";
-//         playerHandS.push(buildCardString(element));
-//         playerScore = calculateHandTotal(playerHand);
-//         document.getElementById("your-cards").append(cardImg);
-//     }); 
-
-//     console.log("computerHand");
-//     computerHand.forEach(element => computerHandS.push(buildCardString(element)));
-//     computerHandS.forEach(element => console.log(element));
-    
-//     console.log("playerHand");
-//     playerHand.forEach(element => playerHandS.push(buildCardString(element)));    
-//     playerHandS.forEach(element => console.log(element));
-
-//     console.log("playerScore:");
-//     console.log(playerScore);
-//     console.log("computerScore:");
-//     console.log(computerScore);
-
-//     let winner = 0; // Set as 1 if player wins, and 2 if computer wins
-//     let doubleStand;
-//     while(winner===0 && doubleStand!=2){
-//         // PLAYER'S TURN
-//         doubleStand = 0;
-//         document.getElementById("hit").addEventListener("click",()=>{
-//             hit();
-//             playerTurn = false;
-//         });
-//         document.getElementById("stand").addEventListener("click",()=>{
-//             doubleStand+=1;
-//             stand();
-//             playerTurn = false;
-//         });
-//         // CHECK FOR 21 
-//         console.log("playerScore:");
-//         console.log(playerScore);
-//         if(playerScore===21){
-//             winner = 1;
-//             break;
-//         }
-//         else if(playerScore>21){
-//             winner = 2;
-//             break;
-//         }
-
-//         // COMPUTER'S TURN
-//         if(computerScore < 17 && playerTurn === false){
-//             let card = deck.pop();
-//             console.log("card");
-//             console.log(card);
-//             cardImg = document.createElement("img");
-//             cardImg.src = "/cards/"+buildCardString(card)+".png";
-//             computerHand.push(card);
-//             computerHandS.push(buildCardString(card));
-//             computerScore = calculateHandTotal(computerHand);
-//             document.getElementById("computer-cards").append(cardImg);  
-//             playerTurn = true; 
-//         }
-//         else if(computerScore>16 && playerTurn===false){
-//             doubleStand+=1;
-//             playerTurn = true; 
-//         }
-//         // CHECK FOR 21 
-//         console.log("computerScore:");
-//         console.log(computerScore);
-//         if(computerScore===21){
-//             winner = 2;
-//             break;
-//         }
-//         else if(computerScore>21){
-//             winner = 1;
-//             break;
-//         }
-//     }
-//     // Game ended (Case 1: someone reaches 21 | Case 2: doubleStand | Case 3: Someone goes over 21)
-//     let message = "";
-//     if(winner===0){     // Case where doubleStand
-//         if(computerScore > playerScore){
-//             message = "You lost 🤕"
-//         }
-//         else if(computerScore>21){
-//             message = "You won! ⭐️"
-//         }
-//         // Both computer and player <= 21
-//         else if(playerScore == computerScore){
-//             message = "Tie 🟰"
-//         }
-//     }
-//     else if (winner === 1){
-//         message = "You won! ⭐️"
-//     }
-//     else if (winner === 2){
-//         message = "You lost 🤕"
-//     }
-//     document.getElementById("computer-sum").innerText = computerScore;
-//     document.getElementById("player-sum").innerText = playerScore;
-//     document.getElementById("results").innerText = message;
-//     console.log("Game ended!");
-
-//     // Player feedback
-
-//     // if(computerScore < 17 && playerTurn = false){
-//     //     let card = deck.pop();
-//     //     console.log("card");
-//     //     console.log(card);
-//     //     cardImg = document.createElement("img");
-//     //     cardImg.src = "/cards/"+buildCardString(card)+".png";
-//     //     computerHand.push(card);
-//     //     computerHandS.push(buildCardString(card));
-//     //     computerScore = calculateHandTotal(computerHand);
-//     //     console.log("computer score:");
-//     //     console.log(computerScore);
-//     //     document.getElementById("computer-cards").append(cardImg);
-//     // }
-//     // console.log("computerScore:");
-//     // console.log(computerScore);
-
-//     // for(let i = 0; i < 2; i++){
-//     //     cardImg = document.createElement("img");
-//     //     let card = deck.pop();
-//     //     cardImg.src = "/cards/"+buildCardString(card)+".png";
-//     //     playerHandS.push(buildCardString(card));
-//     //     playerScore = calculateHandTotal(playerHand);
-//     //     // console.log("Your sum:")
-//     //     document.getElementById("your-cards").append(cardImg);
-//     // }
-//     // console.log("playerScore:");
-//     // console.log(playerScore);
-//     // document.getElementById("hit").addEventListener("click",hit);
-//     // document.getElementById("stand").addEventListener("click",stand);
-// };
-
 const startGame = (deck) => {
     console.log("Game is starting!");
 
@@ -316,13 +104,6 @@ const startGame = (deck) => {
   
     // DEAL CARDS - INITIAL
     ({ computerHand, playerHand } = dealCards(deck, 2));
-    // computerHand.forEach(element => {
-    //     cardImg = document.createElement("img");
-    //     cardImg.src = "/cards/"+buildCardString(element)+".png";
-    //     computerHandS.push(buildCardString(element));
-    //     computerScore = calculateHandTotal(computerHand);
-    //     document.getElementById("computer-cards").append(cardImg);
-    // });
     let first = 0;
     computerHand.forEach(element => {
         if(first===0){
@@ -455,39 +236,11 @@ const startGame = (deck) => {
 };
 
 const buildCardString = (card) => {
+    if(card.rank==='A'){
+        return "1-"+card.suit;
+    }
     return card.rank+"-"+card.suit;
-}
-  
-// Function to display cards in a specified container
-// const displayCards = (containerId, cards, hideFirstCard = false) => {
-//     const container = document.getElementById(containerId);
-  
-//     // Clear existing cards in the container
-//     container.innerHTML = '';
-  
-//     // Create and append card elements to the container
-//     cards.forEach((card, index) => {
-//       const cardElement = document.createElement('div');
-//       cardElement.classList.add('card');
-//       cardElement.textContent = hideFirstCard && index === 0 ? '?' : `${card.rank} ${card.suit}`;
-//       container.appendChild(cardElement);
-//     });
-// };
-  
-// // Function to update the UI
-// const updateUI = (computerHand, playerHand) => {
-// //     // Create and display cards for the computer and user
-//     displayCards('computer-hand', computerHand, true); // Hide one card
-//     displayCards('user-hand', playerHand);
-  
-// //     // Display hand totals
-//     displayHandTotal('computer-total', '?'); // Computer's total is initially unknown
-//     displayHandTotal('user-total', calculateHandTotal(playerHand));
-  
-// //     // Create Hit and Stand buttons
-// //     createButton('Hit', handleHit);
-// //     createButton('Stand', handleStand);
-// };
+};
 
 // Function to calculate hand total
 const calculateHandTotal = (hand) => {
@@ -553,30 +306,12 @@ const stand = () => {
     console.log('Stand button clicked!');
     computerScore = calculateHandTotal(playerHand);
     playerScore = calculateHandTotal(playerHand);
-    // hitPossible = false;
     document.getElementById("hidden").src = "/cards/" + hidden + ".png";
-    // let message = "";
-    // if(playerScore > 21 || computerScore > playerScore){
-    //     message = "You lost 🤕"
-    // }
-    // else if(computerScore>21){
-    //     message = "You won! ⭐️"
-    //     return 1;
-    // }
-    // // Both computer and player <= 21
-    // else if(playerScore == computerScore){
-    //     message = "Tie 🟰"
-
-    // }
     document.getElementById("computer-sum").innerText = computerScore;
     document.getElementById("player-sum").innerText = playerScore;
-    // document.getElementById("results").innerText = message;
 };
   
 const initializeGame = () => {
-    // Initialize your game components and set up event listeners
-    // const startButton = document.getElementById('start-button');
-    // startButton.addEventListener('click', startGame);
     startGame();
 
 };
