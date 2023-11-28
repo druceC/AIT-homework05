@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cards!</title>
+    <link
+      rel="stylesheet"
+      href="stylesheets/style.css"
+      type="text/css"
+      media="screen"
+      title="no title"
+      charset="utf-8"
+    />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script src="javascripts/main.js"></script>
+    <div class="start">
+      <form method="POST" action="">
+        <label for="startValues">Start Values:</label>
+        <input type="text" name="startValues" id="startValues" />
+        <input class="playBtn" type="submit" value="Play" />
+      </form>
+    </div>
+    <div class="game"></div>
+    <!-- Added -->
+    <h2>Computer: <span id="computer-sum"></span></h2>
+    <div id="computer-cards">
+      <img id="hidden" src="cards/BACK.png" />
+    </div>
+    <h2>You: <span id="player-sum"></span></h2>
+    <div id="your-cards"></div>
+    <br />
+    <button id="hit">hit</button>
+    <button id="stand">stand</button>
+    <p id="results"></p>
+  </body>
+</html>
